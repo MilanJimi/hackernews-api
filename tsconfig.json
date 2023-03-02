@@ -1,0 +1,19 @@
+{
+  "compilerOptions":{
+    "target":"es2017",
+    "module":"commonjs",
+    "baseUrl":"./",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "resolveJsonModule":true,
+    "noEmit":true,
+    "esModuleInterop":true,
+    "forceConsistentCasingInFileNames":true,
+    "strict":true,
+    "noImplicitAny":true,
+    "strictNullChecks":true,
+    "noImplicitThis":true,
+    "noImplicitReturns":true,
+    "skipLibCheck":true
+  }
+}
