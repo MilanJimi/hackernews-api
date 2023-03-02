@@ -3,6 +3,7 @@ const { userController } =
 
 userController.getUser = jest.fn().mockReturnValue([
   {
+    id: 'existing_user_id',
     username: 'Existing User',
     password: '$2b$10$aX7uHQDjTi6M82oQztmf5uR3AZ1GhFRfh4FpXg2OZAgmJ8sE9UvOG' // Generated from password: 'pass'
   }

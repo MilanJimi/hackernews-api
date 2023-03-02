@@ -1,5 +1,5 @@
 const authenticate = jest.fn().mockImplementation((req, res, next) => {
-  req.body.username = 'Mock User'
+  req.body.userId = 'mock_user_id'
   return next()
 })
 
