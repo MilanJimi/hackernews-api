@@ -1,8 +1,8 @@
 import { NextFunction, Request, Response } from 'express'
 import jwt from 'jsonwebtoken'
-import { config } from 'src/config/config'
-import { ErrorCode } from 'src/API/errors/enums'
-import { UserFacingError } from 'src/API/errors/error'
+import { config } from '../../config/config'
+import { ErrorCode } from '../../API/errors/enums'
+import { UserFacingError } from '../../API/errors/error'
 
 export type AuthenticatedRequest<T = Request> = T & {
   user: string

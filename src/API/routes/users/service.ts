@@ -1,9 +1,9 @@
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
-import { ErrorCode } from 'src/API/errors/enums'
-import { UserFacingError } from 'src/API/errors/error'
-import { config } from 'src/config/config'
-import { db } from 'src/db/database'
+import { ErrorCode } from '../../errors/enums'
+import { UserFacingError } from '../../errors/error'
+import { config } from '../../../config/config'
+import { db } from '../../../db/database'
 
 export const userService = {
   login: async (username: string, password: string) => {

@@ -1,8 +1,9 @@
 import { Request, Response } from 'express'
-import { ErrorCode } from 'src/API/errors/enums'
-import { UserFacingError } from 'src/API/errors/error'
+import { ErrorCode } from '../../errors/enums'
+import { UserFacingError } from '../../errors/error'
 
 import {
+  addToCollectionSchema,
   collectionIdSchema,
   collectionUpdateSchema,
   newCollectionSchema
@@ -35,7 +36,11 @@ export const handleUpdateCollection = async (req: Request, res: Response) => {
     collectionUpdateSchema.validate(req.body)
   if (bodyError) throw new UserFacingError(ErrorCode.validationFail, 400)
 
-  await collectionService.update(paramsValue.id, bodyValue.name)
+  await collectionService.update(
+    bodyValue.userId,
+    paramsValue.id,
+    bodyValue.name
+  )
   return res.send({ message: 'OK' })
 }
 
@@ -45,4 +50,16 @@ export const handleDeleteCollection = async (req: Request, res: Response) => {
 
   await collectionService.delete(req.body.userId, value.id)
   return res.send({ message: 'OK' })
+}
+
+export const handleAddToCollection = async (req: Request, res: Response) => {
+  const { error, value } = addToCollectionSchema.validate(req.params)
+  if (error) throw new UserFacingError(ErrorCode.validationFail, 400)
+
+  await collectionService.add(
+    req.body.userId,
+    value.collectionId,
+    value.storyId
+  )
+  return res.send({ message: 'Job started' })
 }

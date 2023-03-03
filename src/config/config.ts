@@ -15,8 +15,10 @@ const getConfig = () => {
   assertIsDefined(process.env.ACCESS_TOKEN_SECRET, 'ACCESS_TOKEN_SECRET')
   assertIsDefined(process.env.REFRESH_TOKEN_SECRET, 'REFRESH_TOKEN_SECRET')
   assertIsDefined(process.env.DB_CONNECTION, 'DB_CONNECTION')
+  assertIsDefined(process.env.HACKERNEWS_HOST, 'HACKERNEWS_HOST')
   return {
     port: process.env.PORT,
+    hackernewsHost: process.env.HACKERNEWS_HOST,
     accessTokenSecret: process.env.ACCESS_TOKEN_SECRET,
     refreshTokenSecret: process.env.REFRESH_TOKEN_SECRET,
     dbConnectionString: process.env.DB_CONNECTION

@@ -1,6 +1,6 @@
 import { Request, Response } from 'express'
-import { ErrorCode } from 'src/API/errors/enums'
-import { UserFacingError } from 'src/API/errors/error'
+import { ErrorCode } from '../../errors/enums'
+import { UserFacingError } from '../../errors/error'
 import { loginSchema, newUserSchema } from './schemas'
 import { userService } from './service'
 
@@ -19,5 +19,5 @@ export const handleRegister = async (req: Request, res: Response) => {
   const { username, password } = value
 
   await userService.register(username, password)
-  return res.send(`Created User ${value.username}`)
+  return res.send({ message: 'OK' })
 }

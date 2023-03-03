@@ -1,4 +1,4 @@
-import { config } from 'src/config/config'
+import { config } from './src/config/config'
 import { app } from './src/app'
 import { logger } from './src/logging/logger'
 

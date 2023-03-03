@@ -7,22 +7,26 @@ type CollectionDb = {
 }
 
 const collectionColumns = [
-  'collection.id',
-  'collection.owner_id',
-  'collection.name'
+  'collections.id',
+  'collections.owner_id',
+  'collections.name'
 ]
 
 export const collectionController = {
-  save: async (name: string, ownerId: string) =>
-    dbClient('collections')
+  save: async (ownerId: string, name: string) => {
+    return await dbClient('collections')
       .insert({ name, owner_id: ownerId })
-      .returning<CollectionDb[]>(collectionColumns),
-  update: async (id: string, name: string) =>
-    dbClient('collections').where({ id }).update({ name }),
-  get: async (ownerId: string, id: string) =>
-    dbClient('collections')
+      .returning<CollectionDb[]>(collectionColumns)
+  },
+  update: async (id: string, name: string) => {
+    return await dbClient('collections').where({ id }).update({ name })
+  },
+  get: async (id: string) => {
+    return await dbClient('collections')
       .select<CollectionDb[]>(collectionColumns)
-      .where({ id, owner_id: ownerId }),
-  delete: async (ownerId: string, id: string) =>
-    dbClient('collections').delete().where({ owner_id: ownerId, id })
+      .where({ id })
+  },
+  delete: async (id: string) => {
+    return await dbClient('collections').delete().where({ id })
+  }
 }

@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from 'express'
-import { logger } from 'src/logging/logger'
+import { logger } from '../../logging/logger'
 import { ErrorCode } from './enums'
 import { UserFacingError } from './error'
 

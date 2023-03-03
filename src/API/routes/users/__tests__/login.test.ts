@@ -50,7 +50,6 @@ describe('User management', () => {
   })
 
   test('Login - Wrong Username', async () => {
-    jest.spyOn(db.user, 'getUser').mockImplementation(async () => [])
     const username = 'New User'
     const password = 'pass'
 
@@ -62,7 +61,6 @@ describe('User management', () => {
   })
 
   test('Register - New user', async () => {
-    jest.spyOn(db.user, 'getUser').mockImplementation(async () => [])
     const username = 'New User'
     const password = 'NewPass'
 

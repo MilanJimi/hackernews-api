@@ -1,5 +1,5 @@
 import express from 'express'
-import { catchExceptions } from 'src/API/errors/errorHandler'
+import { catchExceptions } from '../../errors/errorHandler'
 
 import { handleLogin, handleRegister } from './handlers'
 
