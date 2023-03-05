@@ -26,22 +26,24 @@ export type HackernewsCommentDTO = BaseHackernewsResponseDTO & {
   parent: number
 }
 
-const getSingleItem = async (id: number) => {
-  const item = await axios.get<HackernewsStoryDTO | HackernewsCommentDTO>(
-    `${config.hackernewsHost}/v0/item/${id}.json`
-  )
+export const getSingleItem = async (id: number) => {
+  const item = await axios.get<
+    HackernewsStoryDTO | HackernewsCommentDTO | null
+  >(`${config.hackernewsHost}/v0/item/${id}.json`)
   return item.data
 }
 
 export const hackernewsIntegration = {
   getStory: async (id: number) => {
     const story = await getSingleItem(id)
+    if (story === null) throw new UserFacingError(ErrorCode.noSuchItem)
     if (story.type !== 'story')
       throw new UserFacingError(ErrorCode.typeMismatch)
     return story
   },
   getComment: async (id: number) => {
     const comment = await getSingleItem(id)
+    if (comment === null) throw new UserFacingError(ErrorCode.noSuchItem)
     if (comment.type !== 'comment')
       throw new UserFacingError(ErrorCode.typeMismatch)
     return comment

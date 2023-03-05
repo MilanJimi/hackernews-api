@@ -4,5 +4,6 @@ export enum ErrorCode {
   validationFail = 'ERROR_VALIDATION_FAIL',
   userAlreadyExists = 'ERROR_ALREADY_REGISTERED',
   collectionNotFound = 'ERROR_COLLECTION_NOT_FOUND',
-  typeMismatch = 'ERROR_TYPE_MISMATCH'
+  typeMismatch = 'ERROR_TYPE_MISMATCH',
+  noSuchItem = 'ERROR_NO_SUCH_ITEM'
 }
