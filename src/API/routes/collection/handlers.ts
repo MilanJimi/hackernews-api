@@ -3,10 +3,10 @@ import { ErrorCode } from '../../errors/enums'
 import { UserFacingError } from '../../errors/error'
 
 import {
-  addToCollectionSchema,
   collectionIdSchema,
   collectionUpdateSchema,
-  newCollectionSchema
+  newCollectionSchema,
+  storyIdSchema
 } from './schemas'
 import { collectionService } from './service'
 
@@ -53,13 +53,18 @@ export const handleDeleteCollection = async (req: Request, res: Response) => {
 }
 
 export const handleAddToCollection = async (req: Request, res: Response) => {
-  const { error, value } = addToCollectionSchema.validate(req.params)
-  if (error) throw new UserFacingError(ErrorCode.validationFail, 400)
+  const { error: paramsError, value: paramsValue } =
+    collectionIdSchema.validate(req.params)
+  if (paramsError) throw new UserFacingError(ErrorCode.validationFail, 400)
+  const { error: bodyError, value: bodyValue } = storyIdSchema.validate(
+    req.body
+  )
+  if (bodyError) throw new UserFacingError(ErrorCode.validationFail, 400)
 
   await collectionService.add(
     req.body.userId,
-    value.collectionId,
-    value.storyId
+    paramsValue.id,
+    bodyValue.storyId
   )
   return res.send({ message: 'Job started' })
 }

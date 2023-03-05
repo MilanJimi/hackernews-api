@@ -23,7 +23,8 @@ describe('Hackernews integration', () => {
     const rootStoryId = '80824072-2728-41b5-a463-32b2a374a561'
 
     const res = await supertest(app)
-      .post(`/collection/${collectionId}/add/${storyId}`)
+      .post(`/collection/${collectionId}/add`)
+      .send({ storyId })
       .expect(200)
     expect(res.body).toEqual({
       message: 'Job started'
@@ -44,7 +45,8 @@ describe('Hackernews integration', () => {
     const collectionId = 'bf44413c-7ed5-4036-b497-b3ebb9480abe'
 
     const res = await supertest(app)
-      .post(`/collection/${collectionId}/add/${commentId}`)
+      .post(`/collection/${collectionId}/add`)
+      .send({ storyId: commentId })
       .expect(500)
     expect(res.body).toEqual({
       error: ErrorCode.typeMismatch
@@ -54,11 +56,12 @@ describe('Hackernews integration', () => {
   })
 
   test('Add story to collection - No such story - Fail', async () => {
-    const commentId = 0
+    const storyId = 0
     const collectionId = 'bf44413c-7ed5-4036-b497-b3ebb9480abe'
 
     const res = await supertest(app)
-      .post(`/collection/${collectionId}/add/${commentId}`)
+      .post(`/collection/${collectionId}/add`)
+      .send({ storyId })
       .expect(500)
     expect(res.body).toEqual({
       error: ErrorCode.noSuchItem

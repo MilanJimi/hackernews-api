@@ -7,8 +7,8 @@ type NewCollectionRequest = {
 type CollectionIdParams = {
   id: string
 }
-type CollectionAddParams = {
-  collectionId: string
+type StoryIdRequest = {
+  userId: string
   storyId: number
 }
 type CollectionUpdateRequest = {
@@ -21,13 +21,13 @@ export const newCollectionSchema = Joi.object<NewCollectionRequest>({
   name: Joi.string()
 })
 
-export const addToCollectionSchema = Joi.object<CollectionAddParams>({
-  collectionId: Joi.string(),
-  storyId: Joi.number()
-})
-
 export const collectionIdSchema = Joi.object<CollectionIdParams>({
   id: Joi.string()
+})
+
+export const storyIdSchema = Joi.object<StoryIdRequest>({
+  userId: Joi.string(),
+  storyId: Joi.number()
 })
 
 export const collectionUpdateSchema = Joi.object<CollectionUpdateRequest>({

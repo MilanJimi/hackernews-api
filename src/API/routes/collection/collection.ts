@@ -17,9 +17,6 @@ collectionRouter.post('/new', catchExceptions(handleNewCollection))
 collectionRouter.get('/:id', catchExceptions(handleGetCollection))
 collectionRouter.patch('/:id', catchExceptions(handleUpdateCollection))
 collectionRouter.delete('/:id', catchExceptions(handleDeleteCollection))
-collectionRouter.post(
-  '/:collectionId/add/:storyId',
-  catchExceptions(handleAddToCollection)
-)
+collectionRouter.post('/:id/add', catchExceptions(handleAddToCollection))
 
 export { collectionRouter }
