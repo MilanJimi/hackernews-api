@@ -6,6 +6,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "nodemon index.ts",
+    "migrate": "knex migrate:latest",
     "test": "jest"
   },
   "dependencies": {
