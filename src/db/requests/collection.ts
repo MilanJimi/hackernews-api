@@ -1,4 +1,5 @@
 import { dbClient } from '../client'
+import { itemController } from './item'
 
 type CollectionDb = {
   id: string
@@ -25,6 +26,20 @@ export const collectionController = {
     return await dbClient('collections')
       .select<CollectionDb[]>(collectionColumns)
       .where({ id })
+      .first()
+  },
+  getWithStories: async (id: string) => {
+    // If I used join, there would be a lot of redundant collection data fetched
+    const [collection, stories] = await Promise.all([
+      await collectionController.get(id),
+      await itemController.getStoriesForCollection(id)
+    ])
+    return collection
+      ? {
+          ...collection,
+          stories: stories.map(({ story_id }) => story_id)
+        }
+      : null
   },
   delete: async (id: string) => {
     return await dbClient('collections').delete().where({ id })
